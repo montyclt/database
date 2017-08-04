@@ -991,6 +991,19 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
     }
 
     /**
+     * Resolve model instance from value of parameter.
+     *
+     * @param  string  $paramValue
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function resolve($paramValue)
+    {
+        $instance = new static;
+
+        return $instance->newQuery()->findOrFail($paramValue);
+    }
+
+    /**
      * Determine if two models have the same ID and belong to the same table.
      *
      * @param  \Illuminate\Database\Eloquent\Model|null  $model
